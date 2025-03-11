@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import tech.kianseong.tracker.dto.TaskDto;
 import tech.kianseong.tracker.model.Task;
 import tech.kianseong.tracker.service.TaskService;
 
@@ -25,13 +26,14 @@ public class TaskController {
     private final TaskService taskService;
 
     @GetMapping("/")
-    public List<Task> getAllTasks() {
+    public List<TaskDto> getAllTasks() {
         return taskService.getAllTasks();
     }
 
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<?> createTask(@RequestBody @Valid Task task) {
+        taskService.create(task);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
