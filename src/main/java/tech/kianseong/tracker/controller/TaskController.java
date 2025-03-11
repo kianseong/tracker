@@ -2,12 +2,14 @@ package tech.kianseong.tracker.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import tech.kianseong.tracker.model.Task;
 import tech.kianseong.tracker.service.TaskService;
@@ -28,7 +30,8 @@ public class TaskController {
     }
 
     @PostMapping("/")
-    public Task createTask(@RequestBody @Valid Task task) {
-        return taskService.create(task);
+    @ResponseBody
+    public ResponseEntity<?> createTask(@RequestBody @Valid Task task) {
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
