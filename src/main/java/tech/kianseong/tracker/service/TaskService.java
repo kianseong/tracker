@@ -8,7 +8,6 @@ import tech.kianseong.tracker.repository.TaskRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -16,8 +15,14 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
 
-    public List<TaskDto> getAllTasks() {
-        return taskRepository.findAll().stream().map(TaskDto::of).collect(Collectors.toList());
+    public List<TaskDto> getAllTasks(Boolean completed) {
+        List<Task> tasks;
+        if (completed == null) {
+            tasks = taskRepository.findAll();
+        } else {
+            tasks = taskRepository.findByCompleted(completed);
+        }
+        return tasks.stream().map(TaskDto::of).toList();
     }
 
     public Task create(Task task) {

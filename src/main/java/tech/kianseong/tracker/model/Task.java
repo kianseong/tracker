@@ -23,7 +23,7 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
 
-    @NotNull(message = "description is required.")
+    @NotNull(message = "Description is required.")
     private String description;
     private boolean completed;
 
