@@ -1,6 +1,5 @@
 package tech.kianseong.tracker.exception;
 
-import jakarta.validation.ConstraintViolation;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionHandlerController {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorDto> handleException(MethodArgumentNotValidException ex) {
+    public ResponseEntity<ErrorDto> handleException() {
         ErrorDto dto = new ErrorDto(HttpStatus.BAD_REQUEST, "Arguments not valid");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);
     }
