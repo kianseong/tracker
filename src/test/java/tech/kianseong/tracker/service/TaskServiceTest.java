@@ -72,7 +72,7 @@ public class TaskServiceTest {
     }
 
     @Test
-    void testCreate_SaveTask() {
+    void testCreate_SavesTask() {
         when(taskRepository.save(any(Task.class))).thenReturn(TASK_1);
 
         Task createdTask = taskService.create(TASK_1);
@@ -81,5 +81,13 @@ public class TaskServiceTest {
         assertEquals("Test Task 1", createdTask.getDescription());
         assertFalse(createdTask.isCompleted());
         verify(taskRepository, times(1)).save(any(Task.class));
+    }
+
+    @Test
+    void testDelete_DeletesTask() {
+        when(taskRepository.existsById(1L)).thenReturn(true);
+
+        taskService.delete(1L);
+        verify(taskRepository, times(1)).deleteById(1L);
     }
 }

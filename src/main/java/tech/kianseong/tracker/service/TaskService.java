@@ -3,6 +3,7 @@ package tech.kianseong.tracker.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tech.kianseong.tracker.dto.TaskDto;
+import tech.kianseong.tracker.exception.TaskNotFoundException;
 import tech.kianseong.tracker.model.Task;
 import tech.kianseong.tracker.repository.TaskRepository;
 
@@ -29,5 +30,12 @@ public class TaskService {
         task.setCreatedAt(LocalDateTime.now());
         task.setUpdatedAt(LocalDateTime.now());
         return taskRepository.save(task);
+    }
+
+    public void delete(Long id) {
+        if (!taskRepository.existsById(id)) {
+            throw new TaskNotFoundException("Task with id " + id + " not found");
+        }
+        taskRepository.deleteById(id);
     }
 }
