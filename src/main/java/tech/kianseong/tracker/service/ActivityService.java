@@ -24,7 +24,7 @@ public class ActivityService {
     }
 
     public Activity createActivity(String name) {
-        Activity activity = new Activity(null, name, Duration.ZERO);
+        Activity activity = new Activity(null, name, 0);
         return activityRepository.save(activity);
     }
 

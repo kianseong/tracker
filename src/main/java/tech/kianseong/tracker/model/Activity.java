@@ -24,5 +24,14 @@ public class Activity {
 
     private String name;
 
-    private Duration totalTime;
+    private long totalTimeSeconds;
+
+    public Duration getTotalTime() {
+        return Duration.ofSeconds(totalTimeSeconds);
+    }
+
+    public void setTotalTime(Duration duration) {
+        this.totalTimeSeconds = duration.getSeconds();
+    }
+
 }
